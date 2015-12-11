@@ -2888,18 +2888,18 @@ public class HTMLScanner
             else if (c == '>') {
                 return false;
             }
-            else if (c == '<') {
-            	fCurrentEntity.rewind();
-            	return false;
+            else if(c == '<') {
+              fCurrentEntity.rewind();
+              if(fReportErrors) {
+                fErrorReporter.reportError("HTML2001", null);
+              }
+              return false;
             }
             fCurrentEntity.rewind();
             String aname = scanName(false);
-            if (aname == null) {
-                if (fReportErrors) {
-                    fErrorReporter.reportError("HTML1011", null);
-                }
-                empty[0] = skipMarkup(false);
-                return false;
+            if(aname == null) {
+              empty[0] = skipMarkup(false);
+              return false;
             }
             if (!skippedSpaces && fReportErrors) {
                 fErrorReporter.reportError("HTML1013", new Object[] { aname });

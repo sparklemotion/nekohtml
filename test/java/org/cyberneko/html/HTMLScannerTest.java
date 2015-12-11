@@ -16,6 +16,7 @@ import org.apache.xerces.xni.XMLAttributes;
 import org.apache.xerces.xni.XNIException;
 import org.apache.xerces.xni.parser.XMLDocumentFilter;
 import org.apache.xerces.xni.parser.XMLInputSource;
+import org.apache.xerces.xni.parser.XMLParseException;
 import org.apache.xerces.xni.parser.XMLParserConfiguration;
 import org.cyberneko.html.filters.DefaultFilter;
 
@@ -39,6 +40,27 @@ public class HTMLScannerTest extends TestCase {
 		assertFalse(scanner.isEncodingCompatible("ISO-8859-1","UTF-16"));
 		assertFalse(scanner.isEncodingCompatible("UTF-16","Cp1252"));
 	}
+
+  public void testInvalidInput() throws Exception {
+    HTMLConfiguration parser = new HTMLConfiguration();
+    parser.setFeature("http://cyberneko.org/html/features/report-errors", true);
+    final ArrayList errors = new ArrayList();
+    parser.setProperty("http://cyberneko.org/html/properties/error-reporter", new HTMLErrorReporter() {
+      public String formatMessage(String key, Object[] args) {
+          return null;
+      }
+
+      public void reportWarning(String key, Object[] args) throws XMLParseException {
+      }
+
+      public void reportError(String key, Object[] args) throws XMLParseException {
+          errors.add(key);
+      }
+    });
+    XMLInputSource source = new XMLInputSource(null, "myTest", null, new StringReader("<div </div>"), "UTF-8");
+    parser.parse(source);
+    assertEquals("Expected to receive an error", 1, errors.size());
+  }
 
 	public void testEvaluateInputSource() throws Exception {
 	    String string = "<html><head><title>foo</title></head>"
