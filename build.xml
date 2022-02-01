@@ -178,8 +178,11 @@
            author='true' version='true' use='true'
            windowtitle="${Name} Implementation"
            doctitle="${Name}" encoding="ISO-8859-1"
-           bottom="${copyright}" 
-  />
+           bottom="${copyright}">
+			<classpath>
+				<fileset dir='${lib.dir}/xerces-2.10.0' includes='*.jar' />
+			</classpath>
+  </javadoc>
  </target>
  
  <target name='doc-init'>
