@@ -51,7 +51,7 @@
  <!-- DEPENDENCIES -->
  <available property='bcel.available' file='${lib.dir}/bcel-5.2.jar' />
 
- <property name="xerces.version" value="2.11.0"/>
+ <property name="xerces.version" value="2.12.2"/>
 
  <!-- TARGETS --> 
  <target name='all' depends='zip,tgz'/>
@@ -103,7 +103,7 @@
 		unless="compile.skip">
 	<mkdir dir="${build.classes.dir}"/>
 	
-	<compileWith xercesVersion="2.11.0" bridge="2_3"/>
+	<compileWith xercesVersion="${xerces.version}" bridge="2_3"/>
 
 	<copy todir="${build.classes.dir}">
 		<fileset dir='${src.dir}' includes='**' excludes='META-INF/**, **/*.java*' />
@@ -174,7 +174,7 @@
            doctitle="${Name}" encoding="ISO-8859-1"
            bottom="${copyright}">
 			<classpath>
-				<fileset dir='${lib.dir}/xerces-2.11.0' includes='*.jar' />
+				<fileset dir='${lib.dir}/xerces-${xerces.version}' includes='*.jar' />
 			</classpath>
   </javadoc>
  </target>
@@ -306,7 +306,7 @@ public class Version {
 		<delete dir="${build.dir}/junit"/>
 		<mkdir dir="${build.dir}/junit"/>
 
-		<testWith xercesVersion="2.11.0"/>
+		<testWith xercesVersion="${xerces.version}"/>
 
 		<junitreport todir="${build.dir}/junit">
 			<fileset dir="${build.dir}/junit">
