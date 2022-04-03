@@ -2588,7 +2588,7 @@ public class HTMLScanner
                     if (c == '?' || c == '/') {
                         char c0 = (char)c;
                         c = fCurrentEntity.read();
-                        if (c == '>') {
+                        if (c == '>' || c == -1) {
                             break;
                         }
                         fStringBuffer.append(c0);
