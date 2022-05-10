@@ -1,6 +1,6 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>net.sourceforge.nekohtml</groupId>
+  <groupId>org.nokogiri</groupId>
   <artifactId>nekohtml</artifactId>
   <name>Neko HTML</name>
   <description>An HTML parser and tag balancer.</description>
@@ -39,7 +39,7 @@
         <repository>
             <id>nexus-releases</id>
             <name>Nexus Release Repository</name>
-            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement> 
 </project>
